@@ -116,14 +116,15 @@
       transition: max-height 0.6s ease, opacity 0.4s ease, transform 0.4s ease;
       display: flex;
       gap: 20px;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       flex-wrap: wrap;
       pointer-events: none;
+      margin-top: 30px;
     }
 
     #how-it-works.expanded {
-      max-height: 800px;
+      max-height: 1200px;
       opacity: 1;
       transform: translateY(0);
       pointer-events: all;
@@ -131,19 +132,20 @@
 
     #how-it-works ul {
       list-style: inside disc;
-      flex: 1 1 auto;
+      flex: 1 1 100%;
       min-width: 250px;
+      max-width: 600px;
     }
 
+    #how-it-works video,
     #how-it-works img {
-      width: 180px;
-      height: auto;
+      width: 280px;
+      max-width: 100%;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
       transition: transform 0.2s ease;
       transform-style: preserve-3d;
       cursor: pointer;
-      flex-shrink: 0;
       user-select: none;
     }
 
@@ -186,23 +188,24 @@
     <button class="btn" onclick="toggleInfo()">How it works</button>
 
     <div id="how-it-works">
+      <video id="preview-video" src="preview.mp4" autoplay muted loop playsinline></video>
+      <img id="menu-image" src="menu.png" alt="Triggerbot Menu Preview"/>
       <ul>
         <li>🔁 Press <strong>F2</strong> to toggle the Triggerbot menu.</li>
         <li>🎯 The bot scans for the ball's color on your screen.</li>
         <li>⌨️ Hold the selected key to activate the bot.</li>
         <li>⚙️ You can customize the color, key, and delay.</li>
         <li>🖱️ If you want to use a mouse button (like XButton1/XButton2):<br>
-          First, use your mouse software (e.g., Logitech, Razer, etc.) to remap that button to any keyboard key (letter, number, etc.).<br>
+          First, use your mouse software (e.g., Logitech, Razer, etc.) to remap that button to any keyboard key.<br>
           Then, in the menu, click "Set Key" and press that assigned key.<br>
           Hold it during gameplay to activate the triggerbot.
         </li>
       </ul>
-      <img src="menu.png" alt="Triggerbot Menu Preview" id="triggerbot-image" />
     </div>
   </div>
 
   <footer>
-    Hosted with mbb chou ❤️ on <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+    Hosted with ❤️ on <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
   </footer>
 
   <script>
@@ -211,8 +214,8 @@
       infoBox.classList.toggle("expanded");
     }
 
-    const infoBox = document.getElementById("how-it-works");
-    const img = document.getElementById("triggerbot-image");
+    const previewVideo = document.getElementById("preview-video");
+    const menuImage = document.getElementById("menu-image");
 
     function apply3DEffect(e, element) {
       const rect = element.getBoundingClientRect();
@@ -231,10 +234,10 @@
       element.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
     }
 
-    infoBox.addEventListener('mousemove', e => apply3DEffect(e, infoBox));
-    infoBox.addEventListener('mouseleave', () => reset3DEffect(infoBox));
-    img.addEventListener('mousemove', e => apply3DEffect(e, img));
-    img.addEventListener('mouseleave', () => reset3DEffect(img));
+    [previewVideo, menuImage].forEach(el => {
+      el.addEventListener('mousemove', e => apply3DEffect(e, el));
+      el.addEventListener('mouseleave', () => reset3DEffect(el));
+    });
   </script>
 </body>
 </html>
