@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DEX - Blade Ball Triggerbot</title>
+  <link rel="icon" type="image/x-icon" href="logo.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #3a3dff, #00b4ff, #5affc5, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+      position: relative;
+      overflow-y: auto;
+      perspective: 1000px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.18;
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      margin-bottom: 40px;
+    }
+
+    .container:hover {
+      transform: rotateY(5deg) rotateX(5deg) scale(1.03);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      background: #00d4ff;
+      color: #000;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 10px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #00b1d4;
+    }
+
+    #how-it-works {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: max-height 0.6s ease, opacity 0.4s ease, transform 0.4s ease;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      pointer-events: none;
+    }
+
+    #how-it-works.expanded {
+      max-height: 800px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    #how-it-works ul {
+      list-style: inside disc;
+      flex: 1 1 auto;
+      min-width: 250px;
+    }
+
+    #how-it-works img {
+      width: 180px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    /* Footer style */
+    footer {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      user-select: none;
+      z-index: 1000;
+      background-color: rgba(0,0,0,0.3);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    footer a {
+      color: #00d4ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <img src="icc.png" class="bg-overlay" alt="Background Image" />
+
+  <div class="container">
+    <img src="logo.ico" class="logo" alt="DEX Logo" />
+    <h1>DEX - Blade Ball Triggerbot</h1>
+    <p>
+      DEX is a powerful triggerbot for Blade Ball. It detects the color of the ball when it's near your character and automatically clicks to parry at the perfect time.
+    </p>
+
+    <a href="DEX_Triggerbot.exe" class="btn" download>Download DEX</a>
+    <button class="btn" onclick="toggleInfo()">How it works</button>
+
+    <div id="how-it-works">
+      <ul>
+        <li>🔁 Press <strong>F2</strong> to toggle the Triggerbot menu.</li>
+        <li>🎯 The bot scans for the ball's color on your screen.</li>
+        <li>⌨️ Hold the selected key to activate the bot.</li>
+        <li>⚙️ You can customize the color, key, and delay.</li>
+        <li>🖱️ If you want to use a mouse button (like XButton1/XButton2):<br>
+          First, use your mouse software (e.g., Logitech, Razer, etc.) to remap that button to any keyboard key (letter, number, etc.).<br>
+          Then, in the menu, click "Set Key" and press that assigned key.<br>
+          Hold it during gameplay to activate the triggerbot.
+        </li>
+      </ul>
+      <img src="menu.png" alt="Triggerbot Menu Preview" id="triggerbot-image" />
+    </div>
+  </div>
+
+  <footer>
+    Hosted with ❤️ on <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+  </footer>
+
+  <script>
+    function toggleInfo() {
+      const infoBox = document.getElementById("how-it-works");
+      infoBox.classList.toggle("expanded");
+    }
+
+    const infoBox = document.getElementById("how-it-works");
+    const img = document.getElementById("triggerbot-image");
+
+    function apply3DEffect(e, element) {
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * 10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+
+      element.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+    }
+
+    function reset3DEffect(element) {
+      element.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+    }
+
+    infoBox.addEventListener('mousemove', e => apply3DEffect(e, infoBox));
+    infoBox.addEventListener('mouseleave', () => reset3DEffect(infoBox));
+    img.addEventListener('mousemove', e => apply3DEffect(e, img));
+    img.addEventListener('mouseleave', () => reset3DEffect(img));
+  </script>
+</body>
+</html>
